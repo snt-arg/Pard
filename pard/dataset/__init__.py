@@ -5,6 +5,7 @@ from .qm9 import QM9Dataset
 from .spectre import SpectreGraphDataset
 from .arm_graph import ARMDataset
 from.zinc250k import ZINC250k
+from .scene_graphs import SceneGraphs
 
 from torch_geometric.datasets import ZINC
 
@@ -31,7 +32,7 @@ DATA_INFO = {
     },
     'qm9':{
         'class': QM9Dataset,
-        'num_node_features': 5,    ## compute by dataset.data.x.max() + 1
+        'num_node_features': 50,    ## compute by dataset.data.x.max() + 1
         'num_edge_features': 4,    ## compute by dataset.data.edge_attr.max() + 1
         'start_edge_type': 1,      ## compute by dataset.data.edge_attr.min()
         'default_args': {'root': 'data/QM9', 'split': 'train', 'remove_h': False},
@@ -129,6 +130,14 @@ DATA_INFO = {
         'num_edge_features': 0,
         'start_edge_type': 0,   
         'default_args': {'dataset_name': 'community_small', 'root': 'data/ARM', 'split': 'train'},
+        'metric_class': MMDSamplingMetrics, 
+    },
+    'scene_graphs':{
+        'class': SceneGraphs,
+        'num_node_features': 2,   
+        'num_edge_features': 2,
+        'start_edge_type': 0,   
+        'default_args': {'dataset_name': 'scene_graphs','root': 'data', 'split': 'train'},
         'metric_class': MMDSamplingMetrics, 
     },
 }

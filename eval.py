@@ -25,7 +25,8 @@ def eval_model(device, dataset, diffusion_model_dir, blocksize_model_dir=None, e
     atom_decoder = data_info_dict.get('atom_decoder', None)
     metric_class = data_info_dict.get('metric_class', None)
     original_datasets = {split:data_info_dict['class'](**(data_info_dict['default_args'] | {'split':split})) for split in ['train', 'val', 'test']}
-
+    print(original_datasets)
+    asf
     ### build metrics 
     if atom_decoder is None:
         original_loaders = {

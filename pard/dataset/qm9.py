@@ -35,8 +35,25 @@ class QM9Dataset(InMemoryDataset):
         assert split in ['train', 'val', 'test']
         self.split = split
         self.remove_h = remove_h
+        # print(f'dbg transform {transform}')
+        # print(f'dbg pre_transform {pre_transform}')
+        # print(f'dbg pre_filter {pre_filter}')
         super().__init__(root, transform, pre_transform, pre_filter)
         self.data, self.slices = torch.load(self.processed_paths[0])
+        # print(f'dbg self.data {self.data}')
+        # print(f'dbg self.data.x {self.data.x}')
+        # print(f'dbg self.data.edge_index {self.data.edge_index}')
+        # print(f'dbg self.data.edge_attr {self.data.edge_attr}')
+        # print(f'dbg self.data.idx {self.data.idx}')
+        # print(f'dbg self.data.y {self.data.y}')
+        # print(f'dbg self.slices {self.slices}')
+        # print(f'dbg self.slices {self.slices}')
+        # print(f'dbg self.slices [x] {self.slices["x"].shape, self.slices["x"]}')
+        # print(f'dbg self.slices [edge_index] {self.slices["edge_index"].shape, self.slices["edge_index"]}')
+        # print(f'dbg self.slices [edge_attr] {self.slices["edge_attr"].shape, self.slices["edge_attr"]}')
+        # print(f'dbg self.slices [y] {self.slices["y"].shape, self.slices["y"]}')
+        # print(f'dbg self.slices [idx] {self.slices["idx"].shape, self.slices["idx"]}')
+        # # kajsdfh
 
     @property
     def atom_decoder(self):

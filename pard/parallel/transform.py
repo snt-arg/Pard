@@ -30,6 +30,9 @@ class ToOneHot:
         return self.num_edge_features + int(self.add_virtual_edge) + int(self.has_zero_edgetype)
 
     def __call__(self, data:Data):
+        # print(f"dbg in ToOneHot")
+        # print(f"dbf data {data}")
+
         if data.x is None:
             assert self.num_node_features <= 1
             num_nodes = data.edge_index.max() + 1 if not hasattr(data, 'block') else data.block.size(0)
@@ -39,6 +42,10 @@ class ToOneHot:
         # assert data.x.size(-1) == self.num_node_features, (data.x.size(-1), self.num_node_features)
         x = data.x if data.x.dim() == 1 else data.x.squeeze(1)
         data.x = torch.nn.functional.one_hot(x, num_classes=self.num_node_classes).float()
+        # print(f"dbg self.num_node_features {self.num_node_features}")
+        # print(f"dbg data {data}")
+        # print(f"dbg data.edge_index {data.edge_index}")
+        # print(f"dbg data.edge_attr {data.edge_attr}")
 
         if data.edge_attr is None:
             assert self.num_edge_features <= 1
@@ -74,6 +81,7 @@ def compute_higher_order_degrees(edge_index, num_nodes, num_hops=2):
 class ToParallelBlocks:
     # Requires input graphs are **one-hot encoded**
     def __init__(self, max_hops=2, add_virtual_blocks=True, random_partial_blocks=False, to_batched_sequential=False):
+        # print(f"dbg in ToParallelBlocks")
         self.max_hops = max_hops
         self.add_virtual_blocks = add_virtual_blocks
         self.random_partial_blocks = random_partial_blocks
@@ -81,14 +89,21 @@ class ToParallelBlocks:
         self.add_virtual_edges = False
 
     def __call__(self, graph, only_return_blockid=False):
+        print(f"dbg in ToParallelBlocks")
         has_attr = True if hasattr(graph, 'edge_attr') else None # True or None
-
+        # print(f"dbg graph {graph}")
         # Get block id based on weighted degree
         nodes = torch.arange(graph.num_nodes, dtype=int)
         block_id = torch.zeros(graph.num_nodes, dtype=int)
+        # print(f"dbg graph {graph}")
+        # print(f"dbg block_id {block_id}")
+        # sdf
         block_degree, block_size, i = [], [], 1
         edge_index = graph.edge_index
+        
         while block_id.min() == 0:
+            # print(f"dbg edge_index {edge_index}")
+            # print(f"dbg graph.num_nodes {graph.num_nodes}")
             current_degree = degree(edge_index[0], graph.num_nodes, dtype=torch.long)
             weighted_degrees = compute_higher_order_degrees(edge_index, graph.num_nodes, num_hops=self.max_hops)
             weighted_degrees[block_id!=0] = -1

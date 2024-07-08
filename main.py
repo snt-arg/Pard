@@ -19,6 +19,8 @@ cfg.merge_from_file(f'pard/configs/{dataset_name}.yaml')
 cfg = update_cfg(cfg)
 cfg.dataset = dataset_name.split('-')[0]
 if isinstance(cfg.device, int):
+    print(f"dbg flsg device")
+    asdf
     torch.cuda.set_device(cfg.device)
 torch.set_num_threads(cfg.num_workers)
 assert cfg.task in ['block_prediction', 'local_denoising']
@@ -31,16 +33,21 @@ num_edge_features = data_info_dict['num_edge_features']
 start_edge_type   = data_info_dict['start_edge_type']
 atom_decoder = data_info_dict.get('atom_decoder', None)
 metric_class = data_info_dict.get('metric_class', None)
+# print(f"dbg cfg {cfg}")
+# print(f"dbg data_info_dict {data_info_dict}")
 
 # --------------------------------------- data --------------------------------------------
 print(f'Loading {cfg.dataset} dataset...')
 from torch_geometric.transforms import Compose
 one_hot = ToOneHot(num_node_features, num_edge_features, virtual_node_type=cfg.diffusion.num_node_virtual_types, 
                    virtual_edge_type=cfg.diffusion.num_edge_virtual_types, has_zero_edgetype=start_edge_type==0)
+# print(f"dbg one_hot {one_hot}")
 to_parallel_blocks = ToParallelBlocks(max_hops=cfg.diffusion.max_hops, 
                                       add_virtual_blocks= (cfg.task=='local_denoising') and not batched_sequential, 
                                       to_batched_sequential=batched_sequential)
+# print(f"dbg to_parallel_blocks {to_parallel_blocks}")
 train_transform = Compose([one_hot, to_parallel_blocks])
+# print(f"dbg train_transform {train_transform}")
 datasets = {
     split:data_info_dict['class'](**(
                 data_info_dict['default_args'] |
@@ -49,12 +56,13 @@ datasets = {
             )) 
     for split in ['train', 'val', 'test']
 }
-
 # do transform offline to save time, problem: not good for distributed setting, since each process needs to do this
-datasets = {
-    split: [d for d in tqdm(datasets[split], desc=f'Transforming {split} dataset')]
-    for split in ['train', 'val', 'test']
-}
+# datasets = {
+#     split: [d for d in tqdm(datasets[split], desc=f'Transforming {split} dataset')]
+#     for split in ['train', 'val', 'test']
+# }
+# print(f"dbg cfdatasetsg {datasets['train'][0]}")
+# asdf
 
 train_vali = datasets['train'] + datasets['val']
 

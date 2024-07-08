@@ -14,6 +14,8 @@ class ZINC250k(InMemoryDataset):
         self.split = split
         super().__init__(f'{root}/zinc250k', transform, pre_transform, pre_filter)
         self.data, self.slices = torch.load(self.processed_paths[0])
+        print(f'dbg self.data {self.data}')
+        print(f'dbg self.slices [x] {self.slices["x"].shape, self.slices["x"]}')
 
     @property
     def atom_decoder(self):
