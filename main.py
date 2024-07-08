@@ -20,7 +20,6 @@ cfg = update_cfg(cfg)
 cfg.dataset = dataset_name.split('-')[0]
 if isinstance(cfg.device, int):
     print(f"dbg flsg device")
-    asdf
     torch.cuda.set_device(cfg.device)
 torch.set_num_threads(cfg.num_workers)
 assert cfg.task in ['block_prediction', 'local_denoising']
