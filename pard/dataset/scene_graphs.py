@@ -10,10 +10,10 @@ import graph_datasets
 print(graph_datasets.__file__)
 
 
-with open(os.path.join(os.path.dirname(graph_datasets.__file__),"../../../src/situational_graphs_datasets","config", "dataset_testing.json")) as f:
+with open(os.path.join(os.path.dirname(graph_datasets.__file__),"../../../src/graph_datasets","config", "dataset_testing.json")) as f:
     synteticdataset_settings = json.load(f)
 # reasoning_package_path = ament_index_python.get_package_share_directory("graph_reasoning")
-with open(os.path.join(os.path.dirname(graph_datasets.__file__),"../../../src/situational_graphs_reasoning","config", "pard_training.json")) as f:
+with open(os.path.join(os.path.dirname(graph_datasets.__file__),"../../../src/graph_reasoning","config", "pard_training.json")) as f:
     graph_reasoning_settings = json.load(f)
 
 class SceneGraphs(InMemoryDataset):
