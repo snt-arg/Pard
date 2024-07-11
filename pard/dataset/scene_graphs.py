@@ -6,15 +6,18 @@ from torch_geometric.utils import from_networkx
 import shutil, os, json, sys
 
 from graph_datasets.SyntheticDatasetGenerator import SyntheticDatasetGenerator
-import graph_datasets
-print(graph_datasets.__file__)
+from graph_datasets.config import get_config as get_datasets_config
+from graph_reasoning.config import get_config as get_reasoning_config
 
+# Load the JSON configuration
+synteticdataset_settings = get_datasets_config("dataset_testing")
+graph_reasoning_settings = get_reasoning_config("pard_training")
 
-with open(os.path.join(os.path.dirname(graph_datasets.__file__),"../../../src/graph_datasets","config", "dataset_testing.json")) as f:
-    synteticdataset_settings = json.load(f)
-# reasoning_package_path = ament_index_python.get_package_share_directory("graph_reasoning")
-with open(os.path.join(os.path.dirname(graph_datasets.__file__),"../../../src/graph_reasoning","config", "pard_training.json")) as f:
-    graph_reasoning_settings = json.load(f)
+# with open(os.path.join(os.path.dirname(graph_datasets.__file__),"../../../src/graph_datasets","config", "dataset_testing.json")) as f:
+#     synteticdataset_settings = json.load(f)
+# # reasoning_package_path = ament_index_python.get_package_share_directory("graph_reasoning")
+# with open(os.path.join(os.path.dirname(graph_datasets.__file__),"../../../src/graph_reasoning","config", "pard_training.json")) as f:
+#     graph_reasoning_settings = json.load(f)
 
 class SceneGraphs(InMemoryDataset):
     def __init__(self, dataset_name, root='data/ARM', split='train', transform=None, pre_transform=None):
