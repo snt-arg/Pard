@@ -13,18 +13,18 @@ conda activate $ENV
 # conda install pytorch torchvision torchaudio pytorch-cuda=$CUDA -c pytorch -c nvidia -y
 conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 pytorch-cuda=11.8 -c pytorch -c nvidia -y 
 
-# install rdkit
-conda install -c conda-forge rdkit -y
+# # install rdkit
+# conda install -c conda-forge rdkit -y
 
-# install graph-tool
-conda install -c conda-forge graph-tool=2.45 -y
+# # install graph-tool
+# conda install -c conda-forge graph-tool=2.45 -y
 
 
-# install ipython and notebook
-conda install nb_conda -c conda-forge  -y
+# # install ipython and notebook
+# conda install nb_conda -c conda-forge  -y
 
-# install pluggy due to error when creating the singularity
-conda install -c conda-forge pluggy
+# # install pluggy due to error when creating the singularity
+# conda install -c conda-forge pluggy
 
 # install pytorch-geometric
 pip install torch_geometric
