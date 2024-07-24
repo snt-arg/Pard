@@ -38,14 +38,13 @@ RUN conda init
 #  Clone moses inside it CAN I SKIP THIS?
 #RUN git clonehttps://github.com/molecularsets/moses.git
 
-# Install graph dataset and deps
+# Install graph reasoning and deps
 WORKDIR /root/workspaces
-RUN git clone -b graph_reasoning git@github.com:snt-arg/situational_graphs_datasets.git
-RUN mv /root/workspaces/situational_graphs_datasets /root/workspaces/graph_datasets
-WORKDIR /root/workspaces/graph_datasets
-RUN pip install .
-RUN pip install colorama
-RUN pip install seaborn
+RUN git clone -b feat/pard git@github.com:snt-arg/reasoning_ws.git
+WORKDIR /root/workspaces/reasoning_ws
+RUN pip install vcstool
+RUN ./setup.sh
+# RUN pip install .
 
 # # Install graph wrapper and deps
 # WORKDIR /root/workspaces
@@ -70,7 +69,7 @@ RUN pip install seaborn
 # # RUN pip install transforms3d
 
 # Conda environment and dependencies
-RUN Pard/setup.sh
+# RUN /root/workspaces/Pard/setup.sh
 
 # Leave the workindir on Pard
 WORKDIR /root/workspaces/Pard
@@ -82,9 +81,11 @@ RUN rm -rf /root/.ssh/
 # python main.py device 0 dataset scene_graphs task local_denoising diffusion.num_steps 20
 
 #### Shell commands in Local machine
-## docker build --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)"  -t grapharm:original .
-## singularity -d build grapharm.sif docker-daemon://grapharm:original
-## rsync --rsh='ssh -p 8022' -avzu grapharm.sif  jmillan@access-iris.uni.lu:workspace
+## docker build --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)"  -t pard:original .
+### docker save pard:original -o pard.tar
+### singularity -d build pard.sif docker-archive://pard.tar
+## singularity -d build pard.sif docker-daemon://pard:original
+## rsync --rsh='ssh -p 8022' -avzu pard.sif  jmillan@access-iris.uni.lu:workspace
 ## ssh iris-cluster
 
 #### Shell command in iris machine

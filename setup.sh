@@ -19,8 +19,12 @@ conda install -c conda-forge rdkit -y
 # install graph-tool
 conda install -c conda-forge graph-tool=2.45 -y
 
+
 # install ipython and notebook
 conda install nb_conda -c conda-forge  -y
+
+# install pluggy due to error when creating the singularity
+conda install -c conda-forge pluggy
 
 # install pytorch-geometric
 pip install torch_geometric
@@ -35,6 +39,10 @@ pip install pyemd pygsp
 pip install einops
 pip install wandb
 pip install pandas==1.5.3
+
+# reasoning deps
+pip install colorama
+pip install seaborn
 
 # install molsets
 ## if use python 3.8, you can try pip 
