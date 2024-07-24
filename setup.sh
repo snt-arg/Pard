@@ -9,9 +9,9 @@ conda create -n $ENV python=3.10 -y
 eval "$(conda shell.bash hook)" 
 conda activate $ENV
 
-# install pytorch 2.0+ (tested with 2.2)
-# conda install pytorch torchvision torchaudio pytorch-cuda=$CUDA -c pytorch -c nvidia -y
-conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 pytorch-cuda=11.8 -c pytorch -c nvidia -y 
+# # install pytorch 2.0+ (tested with 2.2)
+# # conda install pytorch torchvision torchaudio pytorch-cuda=$CUDA -c pytorch -c nvidia -y
+# conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 pytorch-cuda=11.8 -c pytorch -c nvidia -y 
 
 # # install rdkit
 # conda install -c conda-forge rdkit -y
