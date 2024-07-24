@@ -5,26 +5,26 @@ CUDA=11.8
 cuda=cu118
 
 # ### python 3.8 is needed for molsets if you want to install molsets with pip
-# conda create -n $ENV python=3.10 -y
-# eval "$(conda shell.bash hook)" 
-# conda activate $ENV
+conda create -n $ENV python=3.10 -y
+eval "$(conda shell.bash hook)" 
+conda activate $ENV
 
-# # install pytorch 2.0+ (tested with 2.2)
-# # conda install pytorch torchvision torchaudio pytorch-cuda=$CUDA -c pytorch -c nvidia -y
-# conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 pytorch-cuda=11.8 -c pytorch -c nvidia -y 
+# install pytorch 2.0+ (tested with 2.2)
+# conda install pytorch torchvision torchaudio pytorch-cuda=$CUDA -c pytorch -c nvidia -y
+conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 pytorch-cuda=11.8 -c pytorch -c nvidia -y 
 
-# # install rdkit
-# conda install -c conda-forge rdkit -y
+# install rdkit
+conda install -c conda-forge rdkit -y
 
-# # install graph-tool
-# conda install -c conda-forge graph-tool=2.45 -y
+# install graph-tool
+conda install -c conda-forge graph-tool=2.45 -y
 
 
-# # install ipython and notebook
-# conda install nb_conda -c conda-forge  -y
+# install ipython and notebook
+conda install nb_conda -c conda-forge  -y
 
-# # install pluggy due to error when creating the singularity
-# conda install -c conda-forge pluggy
+# install pluggy due to error when creating the singularity
+conda install -c conda-forge pluggy
 
 # install pytorch-geometric
 pip install torch_geometric

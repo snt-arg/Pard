@@ -69,7 +69,8 @@ RUN ./setup.sh
 # # RUN pip install transforms3d
 
 # Conda environment and dependencies
-# RUN /root/workspaces/Pard/setup.sh
+RUN conda activate pard
+RUN /root/workspaces/Pard/setup.sh
 
 # Leave the workindir on Pard
 WORKDIR /root/workspaces/Pard
