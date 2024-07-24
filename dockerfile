@@ -30,11 +30,9 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 ENV CONDA_DIR /opt/conda
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p /opt/conda
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.12.0-Linux-x86_64.sh -O /opt/conda/miniconda.sh \ && bash /opt/conda/miniconda.sh -b -p /opt/miniconda 
 ENV PATH=$CONDA_DIR/bin:$PATH
 RUN conda init
-RUN conda activate pard
 
 #  Clone moses inside it CAN I SKIP THIS?
 #RUN git clonehttps://github.com/molecularsets/moses.git
