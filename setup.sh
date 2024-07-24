@@ -5,9 +5,9 @@ CUDA=11.8
 cuda=cu118
 
 # ### python 3.8 is needed for molsets if you want to install molsets with pip
-conda create -n $ENV python=3.10 -y
-eval "$(conda shell.bash hook)" 
-conda activate $ENV
+# conda create -n $ENV python=3.10 -y
+# eval "$(conda shell.bash hook)" 
+# conda activate $ENV
 
 # # install pytorch 2.0+ (tested with 2.2)
 # # conda install pytorch torchvision torchaudio pytorch-cuda=$CUDA -c pytorch -c nvidia -y
