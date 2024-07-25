@@ -24,7 +24,8 @@ conda install -c conda-forge graph-tool=2.45 -y
 conda install nb_conda -c conda-forge  -y
 
 # install packages due to error when creating the singularity
-conda install -c conda-forge pluggy certifi==2024.6.2
+conda install -c conda-forge pluggy
+conda install -c conda-forge certifi==2024.6.2
 
 # install pytorch-geometric
 pip install torch_geometric
