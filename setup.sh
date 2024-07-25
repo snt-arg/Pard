@@ -25,7 +25,7 @@ conda install nb_conda -c conda-forge  -y
 
 # install packages due to error when creating the singularity
 conda install -c conda-forge pluggy
-conda install certifi
+conda install -c conda-forge certifi -y
 
 # install pytorch-geometric
 pip install torch_geometric
